@@ -50,7 +50,7 @@
      stack: "react · AI",
      badge: "사이드 프로젝트",
      image: null,
-     href: "https://posle.vercel.app/login",
+     href: "https://posle.vercel.app/login", 
    },
    {
      title: "지코리아",
