@@ -15,9 +15,9 @@
    prompt: "yoon@flowcode:~$",
    role: "시니어 풀스택 개발자 · 15년차",
    intro:
-     "웹서비스 기획부터 배포까지 혼자 가능합니다. 플로우코드를 운영하며 클라이언트 프로젝트와 자체 서비스를 만들고 있습니다.",
+     "맡은 서비스는 끝까지 책임지는 15년차 풀스택 개발자입니다. 기획부터 배포, 운영까지 전 과정을 경험했습니다.",
    tags: ["spring-boot", "react", "php", "ai", "infra"],
-   resumeUrl: "https://portfolio-bice-five-66hls8nry8.vercel.app/resume_yoonsaerom.pdf",
+   resumeUrl: "/resume_yoonsaerom.pdf",
    email: "dev.yoonsr@gmail.com", // TODO
    linkedin: "https://www.linkedin.com/in/your-id", // TODO
  };
