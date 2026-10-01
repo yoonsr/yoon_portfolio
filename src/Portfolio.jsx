@@ -82,7 +82,7 @@
    },
    {
      company: "KRG",
-     role: "풀스택 외주 개발",
+     role: "백엔드 외주 개발",
      period: "2023",
      ownership: "solo",
      highlight: "부동산 서비스 금융 API 연동",
