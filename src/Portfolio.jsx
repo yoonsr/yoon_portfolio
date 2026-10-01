@@ -13,9 +13,9 @@
  const PROFILE = {
    name: "Yoon Saerom",
    prompt: "yoon@flowcode:~$",
-   role: "시니어 풀스택 개발자 · 15년차",
+   role: "시니어 풀스택 개발자 · 14년차",
    intro:
-     "맡은 서비스는 끝까지 책임지는 15년차 풀스택 개발자입니다. 기획부터 배포, 운영까지 전 과정을 경험했습니다.",
+     "맡은 서비스는 끝까지 책임지는 14년차 풀스택 개발자입니다. 기획부터 배포, 운영까지 전 과정을 경험했습니다.",
    tags: ["spring-boot", "react", "php", "ai", "infra"],
    resumeUrl: "/resume_yoonsaerom.pdf",
    email: "dev.yoonsr@gmail.com", // TODO
