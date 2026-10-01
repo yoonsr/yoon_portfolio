@@ -62,7 +62,7 @@
  const EXPERIENCE = [
    {
      company: "플로우코드",
-     role: "대표 · 풀스택 개발",
+     role: "프리랜서 · 풀스택 개발",
      period: "2025 – 현재",
      ownership: "solo",
      highlight: "홈페이지·쇼핑몰 외주 기획부터 배포까지",
