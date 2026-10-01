@@ -11,7 +11,7 @@
  const ACCENT = "#f2a65a";
 
  const PROFILE = {
-   name: "Yoon SaeRom",
+   name: "Yoon Saerom",
    prompt: "yoon@flowcode:~$",
    role: "시니어 풀스택 개발자 · 15년차",
    intro:
@@ -34,30 +34,30 @@
         title: "부천시 리틀 야구단",
         desc: "리틀 야구단 팀 홈페이지",
         stack: "react · tailwind · vercel",
-        image: null,
+        image: "/bucheon.png",
         href: "https://bucheon-baseball.kr/",
     },
     {
       title: "미트kg",
       desc: "정육 소매 쇼핑몰 · 관리자 페이지",
       stack: "spring-boot · react · MySQL",
-      image: null,
+      image: "/meatkg.png",
       href: "https://meatkg.co.kr/",
     },
-   {
-     title: "포슬",
-     desc: "소상공인용 AI SNS 콘텐츠 생성 서비스",
-     stack: "react · AI",
-     badge: "사이드 프로젝트",
-     image: null,
-     href: "https://posle.vercel.app/login", 
-   },
    {
      title: "지코리아",
      desc: "반도체 부품 기업 홈페이지",
      stack: "react · tailwind · MongoDB",
-     image: null,
+     image: "/gkorea.png",
      href: "https://www.g-korea.co.kr/",
+   },
+   {
+     title: "포슬",
+     desc: "소상공인용 AI SNS 콘텐츠 생성 서비스 (진행중)",
+     stack: "react · AI",
+     badge: "사이드 프로젝트",
+     image: "/posle.png",
+     href: "https://posle.vercel.app/login", 
    },
  ];
  
@@ -89,35 +89,38 @@
  }
  
  function ProjectCard({ project, index }) {
-   return (
-     <a
-       href={project.href}
-       className={`group flex gap-5 rounded-[10px] border border-[#2a2e32] bg-[#1f2327] p-4 transition-colors hover:border-[#4a5056] ${focus}`}
-     >
-       <div className="flex h-28 w-36 shrink-0 items-center justify-center overflow-hidden rounded-md bg-[#2c3136] text-[11px] text-[#a3a8ad]">
-         {project.image ? (
-           <img src={project.image} alt={`${project.title} 화면`} className="h-full w-full object-cover" />
-         ) : (
-           "[Screenshot]"
-         )}
-       </div>
-       <div className="flex min-w-0 flex-col gap-1.5 pt-1">
-         <div className="flex items-center gap-2">
-           <span className={`${mono} text-xs`} style={{ color: ACCENT }}>
-             {String(index + 1).padStart(2, "0")}
-           </span>
-           {project.badge && (
-             <span className={`${mono} rounded border border-[#3a3f44] px-1.5 py-0.5 text-[10px] text-[#c9c5be]`}>
-               {project.badge}
-             </span>
-           )}
-         </div>
-         <span className="text-xl font-medium text-[#ece8e1] group-hover:text-[#f2a65a]">{project.title}</span>
-         <span className="text-sm leading-relaxed text-[#a3a8ad]">{project.desc}</span>
-         <span className={`${mono} text-[11px] text-[#a3a8ad]`}>{project.stack}</span>
-       </div>
-     </a>
-   );
+    const isExternal = project.href?.startsWith("http");
+
+    return (
+        <a
+            href={project.href}
+            {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
+            className={`group flex gap-5 rounded-[10px] border border-[#2a2e32] bg-[#1f2327] p-4 transition-colors hover:border-[#4a5056] ${focus}`}
+        >
+            <div className="flex h-28 w-36 shrink-0 items-center justify-center overflow-hidden rounded-md bg-[#2c3136] text-[11px] text-[#a3a8ad]">
+                {project.image ? (
+                    <img src={project.image} alt={`${project.title} 화면`} className="h-full w-full object-cover" />
+                ) : (
+                    "[Screenshot]"
+                )}
+            </div>
+            <div className="flex min-w-0 flex-col gap-1.5 pt-1">
+                <div className="flex items-center gap-2">
+                    <span className={`${mono} text-xs`} style={{ color: ACCENT }}>
+                        {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {project.badge && (
+                        <span className={`${mono} rounded border border-[#3a3f44] px-1.5 py-0.5 text-[10px] text-[#c9c5be]`}>
+                            {project.badge}
+                        </span>
+                    )}
+                </div>
+                <span className="text-xl font-medium text-[#ece8e1] group-hover:text-[#f2a65a]">{project.title}</span>
+                <span className="text-sm leading-relaxed text-[#a3a8ad]">{project.desc}</span>
+                <span className={`${mono} text-[11px] text-[#a3a8ad]`}>{project.stack}</span>
+            </div>
+        </a>
+    );
  }
  
  function InfoPanel({ label, children, footer }) {
