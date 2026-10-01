@@ -154,12 +154,12 @@
            <span className={`${mono} text-sm`} style={{ color: ACCENT }}>
              {PROFILE.prompt}
            </span>
-           <button
+           {/* <button
              type="button"
              className={`${mono} min-h-[44px] rounded-md border border-[#3a3f44] bg-[#1d2023] px-3 text-[13px] text-[#ece8e1] ${focus}`}
            >
              KR | EN
-           </button>
+           </button> */}
          </div>
  
          <div className="flex flex-col gap-2.5 lg:pt-6">
