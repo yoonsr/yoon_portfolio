@@ -1,11 +1,6 @@
 /**
  * sr 포트폴리오
  * React + Tailwind CSS
- *
- * 폰트: index.html <head>에 아래 한 줄 추가
- * <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
- *
- * index.html의 <html lang="ko"> 도 확인해주세요.
  */
 
  const ACCENT = "#f2a65a";
