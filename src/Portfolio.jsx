@@ -51,7 +51,7 @@
    {
      title: "포슬",
      desc: "소상공인용 AI SNS 콘텐츠 생성 서비스 (진행중)",
-     stack: "react · ai",
+     stack: "react · node.js · ai",
      badge: "사이드 프로젝트",
      image: "/posle.png",
      href: "https://posle.vercel.app/login",
