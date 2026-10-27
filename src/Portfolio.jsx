@@ -17,6 +17,17 @@
    linkedin: "https://www.linkedin.com/in/your-id", // TODO
  };
  
+ // 크몽·숨고처럼 외부 연락처를 올리면 안 되는 곳에 공유할 때 쓰는 값
+ // 예) https://내도메인/?from=kmong  또는  ?from=soomgo
+ const MARKET_SOURCES = ["kmong", "soomgo"];
+
+ // 주소의 ?from= 값을 읽어서, 위 목록에 있으면 true
+ function isMarketView() {
+   if (typeof window === "undefined") return false;
+   const from = new URLSearchParams(window.location.search).get("from");
+   return MARKET_SOURCES.includes((from || "").toLowerCase());
+ }
+
  const OWNERSHIP = {
    solo: { label: "전담 개발", highlight: true },
    lead: { label: "개발 리드", highlight: false },
@@ -196,6 +207,9 @@
  }
  
  export default function Portfolio() {
+   // 크몽·숨고에서 들어온 경우 이력서 다운로드와 이메일을 숨김
+   const hideContact = isMarketView();
+
    return (
      <div
        className="min-h-screen bg-[#16191c] text-[#ece8e1] lg:flex lg:h-screen lg:overflow-hidden"
@@ -225,22 +239,24 @@
            ))}
          </ul>
  
-         <div className={`${mono} flex flex-col gap-3 text-sm lg:mt-auto`}>
-           <a
-             href={PROFILE.resumeUrl}
-             download="윤새롬_풀스택개발자_이력서.pdf"
-             className={`flex min-h-[52px] items-center justify-center rounded-md font-medium text-[#121416] ${focus}`}
-             style={{ backgroundColor: ACCENT }}
-           >
-             이력서 다운로드 ↓
-           </a>
-           <a
-             href={`mailto:${PROFILE.email}`}
-             className={`flex min-h-[52px] items-center justify-center rounded-md border border-[#3a3f44] hover:border-[#6a7076] ${focus}`}
-           >
-             {PROFILE.email}
-           </a>
-         </div>
+         {!hideContact && (
+           <div className={`${mono} flex flex-col gap-3 text-sm lg:mt-auto`}>
+             <a
+               href={PROFILE.resumeUrl}
+               download="윤새롬_풀스택개발자_이력서.pdf"
+               className={`flex min-h-[52px] items-center justify-center rounded-md font-medium text-[#121416] ${focus}`}
+               style={{ backgroundColor: ACCENT }}
+             >
+               이력서 다운로드 ↓
+             </a>
+             <a
+               href={`mailto:${PROFILE.email}`}
+               className={`flex min-h-[52px] items-center justify-center rounded-md border border-[#3a3f44] hover:border-[#6a7076] ${focus}`}
+             >
+               {PROFILE.email}
+             </a>
+           </div>
+         )}
        </aside>
  
        {/* Main */}
