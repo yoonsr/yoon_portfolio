@@ -20,14 +20,14 @@
  // 크몽·숨고처럼 외부 연락처를 올리면 안 되는 곳에 공유할 때 쓰는 값
  // 예) https://내도메인/?from=kmong  또는  ?from=soomgo
  const MARKET_SOURCES = ["kmong", "soomgo"];
-
+ 
  // 주소의 ?from= 값을 읽어서, 위 목록에 있으면 true
  function isMarketView() {
    if (typeof window === "undefined") return false;
    const from = new URLSearchParams(window.location.search).get("from");
    return MARKET_SOURCES.includes((from || "").toLowerCase());
  }
-
+ 
  const OWNERSHIP = {
    solo: { label: "전담 개발", highlight: true },
    lead: { label: "개발 리드", highlight: false },
@@ -145,8 +145,10 @@
  
  function Panel({ label, children, className = "" }) {
    return (
+     // [수정] min-w-0: 그리드 칸이 내용 때문에 화면 밖으로 늘어나지 않게
+     // [수정] 모바일은 안쪽 여백을 조금 줄임 (p-5 → sm 이상 p-6)
      <section
-       className={`flex flex-col gap-4 rounded-[10px] border border-[#2a2e32] bg-[#1f2327] p-6 ${className}`}
+       className={`flex min-w-0 flex-col gap-4 rounded-[10px] border border-[#2a2e32] bg-[#1f2327] p-5 sm:p-6 ${className}`}
      >
        <SectionLabel>{label}</SectionLabel>
        {children}
@@ -158,12 +160,15 @@
    const isExternal = project.href?.startsWith("http");
  
    return (
+     // [수정] 모바일: 이미지 위 / 텍스트 아래 (flex-col), sm 이상: 기존처럼 가로 배치
+     // [수정] min-w-0: 말줄임(truncate)이 제대로 동작하도록
      <a
        href={project.href}
        {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
-       className={`group flex gap-4 rounded-[10px] border border-[#2a2e32] bg-[#1f2327] p-3.5 transition-colors hover:border-[#4a5056] ${focus}`}
+       className={`group flex min-w-0 flex-col gap-3 rounded-[10px] border border-[#2a2e32] bg-[#1f2327] p-3.5 transition-colors hover:border-[#4a5056] sm:flex-row sm:gap-4 ${focus}`}
      >
-       <div className="flex h-24 w-32 shrink-0 items-center justify-center overflow-hidden rounded-md bg-[#2c3136] text-[11px] text-[#a3a8ad]">
+       {/* [수정] 모바일: 카드 폭 가득 + 16:10 비율, sm 이상: 기존 128×96 */}
+       <div className="flex aspect-[16/10] w-full shrink-0 items-center justify-center overflow-hidden rounded-md bg-[#2c3136] text-[11px] text-[#a3a8ad] sm:aspect-auto sm:h-24 sm:w-32">
          {project.image ? (
            <img src={project.image} alt={`${project.title} 화면`} className="h-full w-full object-cover" />
          ) : (
@@ -182,7 +187,8 @@
            {project.title}
            {isExternal && <span className="ml-1 text-sm text-[#a3a8ad]">↗</span>}
          </span>
-         <span className="truncate text-sm text-[#a3a8ad]">{project.desc}</span>
+         {/* [수정] 모바일은 줄바꿈 허용, sm 이상에서만 한 줄 말줄임 */}
+         <span className="text-sm text-[#a3a8ad] sm:truncate">{project.desc}</span>
          <span className={`${mono} text-[11px] text-[#a3a8ad]`}>{project.stack}</span>
        </div>
      </a>
@@ -191,7 +197,8 @@
  
  function ExperienceRow({ item }) {
    return (
-     <li className="grid grid-cols-[104px_1fr] gap-x-4 border-t border-[#2a2e32] py-3 first:border-t-0 first:pt-0 last:pb-0">
+     // [수정] 모바일: 기간을 회사명 위에 한 줄로, sm 이상: 기존 2열
+     <li className="grid grid-cols-1 gap-y-1 border-t border-[#2a2e32] py-3 first:border-t-0 first:pt-0 last:pb-0 sm:grid-cols-[104px_minmax(0,1fr)] sm:gap-x-4">
        <span className={`${mono} pt-0.5 text-xs text-[#a3a8ad]`}>{item.period}</span>
        <div className="flex min-w-0 flex-col gap-1">
          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -209,27 +216,30 @@
  export default function Portfolio() {
    // 크몽·숨고에서 들어온 경우 이력서 다운로드와 이메일을 숨김
    const hideContact = isMarketView();
-
+ 
    return (
      <div
-       className="min-h-screen bg-[#16191c] text-[#ece8e1] lg:flex lg:h-screen lg:overflow-hidden"
+       className="min-h-screen overflow-x-hidden bg-[#16191c] text-[#ece8e1] lg:flex lg:h-screen lg:overflow-hidden"
        style={{ fontFamily: "'Space Grotesk', 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif" }}
      >
        {/* Sidebar */}
-       <aside className="flex flex-col gap-7 border-b border-[#2a2e32] bg-[#0f1113] px-6 py-10 sm:px-12 lg:w-[380px] lg:shrink-0 lg:border-b-0 lg:border-r lg:py-14">
+       <aside className="flex flex-col gap-7 border-b border-[#2a2e32] bg-[#0f1113] px-5 py-10 sm:px-12 lg:w-[380px] lg:shrink-0 lg:border-b-0 lg:border-r lg:py-14">
          <span className={`${mono} text-sm`} style={{ color: ACCENT }}>
            {PROFILE.prompt}
          </span>
  
          <div className="flex flex-col gap-2.5 lg:pt-6">
-           <h1 className="text-5xl font-bold leading-none tracking-tight lg:text-[56px]">
+           {/* [수정] 모바일 이름 크기 축소 (40px → sm 48px → lg 56px) */}
+           <h1 className="text-[40px] font-bold leading-none tracking-tight sm:text-5xl lg:text-[56px]">
              {PROFILE.name}
              <span style={{ color: ACCENT }}>.</span>
            </h1>
            <p className={`${mono} text-sm text-[#a3a8ad]`}>{PROFILE.role}</p>
          </div>
  
-         <p className="max-w-prose text-[17px] leading-relaxed text-[#c9c5be]">{PROFILE.intro}</p>
+         <p className="max-w-prose break-keep text-base leading-relaxed text-[#c9c5be] sm:text-[17px]">
+           {PROFILE.intro}
+         </p>
  
          <ul className={`${mono} flex flex-wrap gap-2 text-xs text-[#c9c5be]`}>
            {PROFILE.tags.map((t) => (
@@ -251,7 +261,7 @@
              </a>
              <a
                href={`mailto:${PROFILE.email}`}
-               className={`flex min-h-[52px] items-center justify-center rounded-md border border-[#3a3f44] hover:border-[#6a7076] ${focus}`}
+               className={`flex min-h-[52px] items-center justify-center break-all rounded-md border border-[#3a3f44] px-3 hover:border-[#6a7076] ${focus}`}
              >
                {PROFILE.email}
              </a>
@@ -260,17 +270,19 @@
        </aside>
  
        {/* Main */}
-       <main className="flex flex-1 flex-col gap-8 px-6 py-10 sm:px-12 lg:overflow-y-auto lg:px-12 lg:py-12">
+       <main className="flex min-w-0 flex-1 flex-col gap-8 px-5 py-10 sm:px-12 lg:overflow-y-auto lg:px-12 lg:py-12">
          <section className="flex flex-col gap-4">
            <SectionLabel>대표 프로젝트</SectionLabel>
-           <div className="grid gap-3 xl:grid-cols-2">
+           {/* [핵심 수정] grid-cols-1 = minmax(0, 1fr): 칸이 화면 폭을 넘지 않게 고정 */}
+           <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
              {PROJECTS.map((p, i) => (
                <ProjectCard key={p.title} project={p} index={i} />
              ))}
            </div>
          </section>
  
-         <div className="grid gap-3 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+         {/* [핵심 수정] 여기도 grid-cols-1 추가 */}
+         <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
            <Panel label="경력">
              <ul className="flex flex-col">
                {EXPERIENCE.map((e) => (
