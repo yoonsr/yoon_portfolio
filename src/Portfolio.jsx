@@ -260,6 +260,12 @@
                이력서 다운로드 ↓
              </a>
              <a
+               href="/skill"
+               className={`flex min-h-[52px] items-center justify-center rounded-md border border-[#3a3f44] px-3 hover:border-[#6a7076] ${focus}`}
+             >
+               스킬 인벤토리 →
+             </a>
+             <a
                href={`mailto:${PROFILE.email}`}
                className={`flex min-h-[52px] items-center justify-center break-all rounded-md border border-[#3a3f44] px-3 hover:border-[#6a7076] ${focus}`}
              >
