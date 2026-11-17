@@ -278,7 +278,7 @@
        {/* Main */}
        <main className="flex min-w-0 flex-1 flex-col gap-8 px-5 py-10 sm:px-12 lg:overflow-y-auto lg:px-12 lg:py-12">
          <section className="flex flex-col gap-4">
-           <SectionLabel>대표 프로젝트</SectionLabel>
+           <SectionLabel>2026 프로젝트</SectionLabel>
            {/* [핵심 수정] grid-cols-1 = minmax(0, 1fr): 칸이 화면 폭을 넘지 않게 고정 */}
            <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
              {PROJECTS.map((p, i) => (
